@@ -2,6 +2,8 @@ package com.shibumi;
 
 import org.junit.Test;
 
+import java.util.Random;
+
 import static org.junit.Assert.assertEquals;
 
 public class MaximumPathSumTest {
@@ -44,6 +46,22 @@ public class MaximumPathSumTest {
         MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
         int maxValue = maximumPathSum.calculateMaxSum();
         assertEquals(12, maxValue);
+    }
+
+    @Test
+    public void testCalculateMaxSum_withRandomNumbers() {
+        Random random = new Random();
+        int[][] matrix = new int[3][3];
+        for (int i=0; i< matrix.length; i++) {
+            for (int j=0; j< matrix[i].length; j++) {
+                int randomValue = random.nextInt((50 - 0) + 1) + 0;
+                matrix[i][j] = randomValue;
+            }
+        }
+        MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
+        maximumPathSum.print(matrix);
+        int maxValue = maximumPathSum.calculateMaxSum();
+        System.out.println("answer: " + maxValue);
     }
 
 }

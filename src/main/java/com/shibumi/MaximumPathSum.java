@@ -27,7 +27,7 @@ public class MaximumPathSum {
         return memo[matrix.length-1][matrix[0].length-1];
     }
 
-    private void print(int[][] array) {
+    public void print(int[][] array) {
         for (int[] row : array) {
             System.out.println(Arrays.toString(row));
         }
