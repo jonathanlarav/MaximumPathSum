@@ -91,6 +91,34 @@ public class MaximumPathSumTest {
         assertEquals(7, maxValue);
     }
 
+    /**
+     * Input grid:
+     *
+     * -1 -3 -1
+     * -1 -5 -1
+     * -4 -2 -1
+     *
+     **/
+    @Test
+    public void testCalculateMaxSum_withAllNegativeValues() {
+        int[][] matrix = new int[3][3];
+        matrix[0][0] = -1;
+        matrix[0][1] = -3;
+        matrix[0][2] = -1;
+
+        matrix[1][0] = -1;
+        matrix[1][1] = -5;
+        matrix[1][2] = -1;
+
+        matrix[2][0] = -4;
+        matrix[2][1] = -2;
+        matrix[2][2] = -1;
+
+        MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
+        int maxValue = maximumPathSum.calculateMaxSum();
+        assertEquals(-7, maxValue);
+    }
+
 
     /**
      * Input grid:
