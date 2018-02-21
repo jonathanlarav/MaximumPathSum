@@ -1,5 +1,9 @@
 package com.shibumi;
 
+import static com.shibumi.Direction.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import org.junit.Test;
 
 import java.util.Random;
@@ -7,7 +11,7 @@ import java.util.Random;
 import static org.junit.Assert.assertEquals;
 
 public class MaximumPathSumTest {
-
+    
     /**
      * Input grid:
      *
@@ -32,7 +36,7 @@ public class MaximumPathSumTest {
         matrix[2][2] = 1;
 
         MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
-        int maxValue = maximumPathSum.calculateMaxSum();
+        int maxValue = maximumPathSum.calculateMaxSum().getMax();
         assertEquals(28, maxValue);
     }
 
@@ -60,7 +64,7 @@ public class MaximumPathSumTest {
         matrix[2][2] = 1;
 
         MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
-        int maxValue = maximumPathSum.calculateMaxSum();
+        int maxValue = maximumPathSum.calculateMaxSum().getMax();
         assertEquals(12, maxValue);
     }
 
@@ -88,7 +92,7 @@ public class MaximumPathSumTest {
         matrix[2][2] = 1;
 
         MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
-        int maxValue = maximumPathSum.calculateMaxSum();
+        int maxValue = maximumPathSum.calculateMaxSum().getMax();
         assertEquals(7, maxValue);
     }
 
@@ -116,7 +120,7 @@ public class MaximumPathSumTest {
         matrix[2][2] = -1;
 
         MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
-        int maxValue = maximumPathSum.calculateMaxSum();
+        int maxValue = maximumPathSum.calculateMaxSum().getMax();
         assertEquals(-7, maxValue);
     }
 
@@ -148,7 +152,7 @@ public class MaximumPathSumTest {
         matrix[2][3] = 7;
 
         MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
-        int maxValue = maximumPathSum.calculateMaxSum();
+        int maxValue = maximumPathSum.calculateMaxSum().getMax();
         assertEquals(25, maxValue);
     }
 
@@ -185,7 +189,7 @@ public class MaximumPathSumTest {
         matrix[3][3] = 3;
 
         MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
-        int maxValue = maximumPathSum.calculateMaxSum();
+        int maxValue = maximumPathSum.calculateMaxSum().getMax();
         assertEquals(31, maxValue);
     }
 
@@ -213,24 +217,27 @@ public class MaximumPathSumTest {
         matrix[2][2] = 1;
 
         MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
-        String path = maximumPathSum.findMaximumPath();
-        assertEquals("8 5 9 5 1", path);
+        MaxWithPath actual = maximumPathSum.calculateMaxSum();
+//        String path = maximumPathSum.findMaximumPath();
+//        assertEquals("8 5 9 5 1", path);
+        List<Direction> expected = Arrays.asList(down, down, right, right);
+        assertEquals(expected, actual.getDirections());
     }
   
-    @Test
-    public void testCalculateMaxSum_withRandomNumbers() {
-        Random random = new Random();
-        int[][] matrix = new int[3][3];
-        for (int i=0; i< matrix.length; i++) {
-            for (int j=0; j< matrix[i].length; j++) {
-                int randomValue = random.nextInt((50 - 0) + 1) + 0;
-                matrix[i][j] = randomValue;
-            }
-        }
-        MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
-        maximumPathSum.print(matrix);
-        int maxValue = maximumPathSum.calculateMaxSum();
-        System.out.println("answer: " + maxValue);
-    }
+//    @Test
+//    public void testCalculateMaxSum_withRandomNumbers() {
+//        Random random = new Random();
+//        int[][] matrix = new int[3][3];
+//        for (int i=0; i< matrix.length; i++) {
+//            for (int j=0; j< matrix[i].length; j++) {
+//                int randomValue = random.nextInt((50 - 0) + 1) + 0;
+//                matrix[i][j] = randomValue;
+//            }
+//        }
+//        MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
+//        maximumPathSum.print(matrix);
+//        int maxValue = maximumPathSum.calculateMaxSum();
+//        System.out.println("answer: " + maxValue);
+//    }
 
 }
