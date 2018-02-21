@@ -16,10 +16,16 @@ public class MaximumPathSum {
         for (int i=0; i< this.matrix.length; i++) {
             for (int j=0; j< this.matrix[i].length; j++) {
                 int value = this.matrix[i][j];
-                int up = i-1 < 0 ? 0 : memo[i-1][j];
-                int left = j-1 < 0 ? 0 : memo[i][j-1];
+                Integer up = i-1 < 0 ? null : memo[i-1][j];
+                Integer left = j-1 < 0 ? null : memo[i][j-1];
 
-                value += left > up ? left : up;
+                if(up == null && left!=null) {
+                    value+=left;
+                } else if (left==null && up!=null) {
+                    value+=up;
+                } else if (left!=null && up!=null){
+                    value += left > up ? left : up;
+                }
                 memo[i][j] = value;
             }
         }
