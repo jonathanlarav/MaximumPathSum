@@ -9,9 +9,9 @@ public class MaximumPathSumTest {
     /**
      * Input grid:
      *
-     * 8 6 7
-     * 5 3 0
-     * 9 5 1
+     * 8 6 7   8  14 21
+     * 5 3 0   13 17 21
+     * 9 5 1   22 27 28
      *
      **/
     @Test
@@ -66,7 +66,7 @@ public class MaximumPathSumTest {
     /**
      * Input grid:
      *
-     * 1 3 -1
+     * 1 3 1
      * -1 -5 1
      * 4 2 1
      *

@@ -1,7 +1,6 @@
 package com.shibumi;
 
 import java.util.Arrays;
-import java.util.TreeMap;
 
 public class MaximumPathSum {
 
@@ -11,37 +10,12 @@ public class MaximumPathSum {
         this.matrix = matrix;
     }
 
-    public String findMaximumPath() {
-
-        TreeMap<Integer, String> paths = new TreeMap<>();
-        accumulateAllPaths(0, 0, "", 0, paths);
-        return paths.lastEntry().getValue().trim();
-    }
-
-    public void accumulateAllPaths(int row, int col, String path, int total, TreeMap<Integer, String> paths) {
-        if (row == matrix.length - 1) {
-            for (int i = col; i < matrix[0].length; i++) {
-                path += " " + matrix[row][i];
-                total += matrix[row][i];
-            }
-            paths.put(total, path);
-            return;
-        }
-        if (col == matrix[0].length - 1) {
-            for (int i = row; i <= matrix.length - 1; i++) {
-                path += " " + matrix[i][col];
-                total += matrix[i][col];
-            }
-            paths.put(total, path);
-            return;
-        }
-        path = path + " " + matrix[row][col];
-        total += matrix[row][col];
-        accumulateAllPaths(row + 1, col, path, total, paths);
-        accumulateAllPaths(row, col + 1, path, total, paths);
-    }
-
     public int calculateMaxSum() {
+        int[][] maxValuesMatrix = calculateValuesMatrix();
+        return maxValuesMatrix[matrix.length-1][matrix[0].length-1];
+    }
+
+    private int[][] calculateValuesMatrix() {
         int[][] memo = new int[matrix.length][matrix[0].length];
 
         for (int i=0; i< this.matrix.length; i++) {
@@ -54,8 +28,30 @@ public class MaximumPathSum {
                 memo[i][j] = value;
             }
         }
-        //print(memo);
-        return memo[matrix.length-1][matrix[0].length-1];
+        return memo;
+    }
+
+    public String findMaximumPath() {
+        int[][] maxValuesMatrix = calculateValuesMatrix();
+        return findPath(maxValuesMatrix);
+    }
+
+    private String findPath(int[][] memo) {
+        String path="";
+        int row=memo.length-1, col=memo[0].length-1;
+        while(row != 0 || col != 0){
+            path = matrix[row][col] + " " + path;
+
+            int left = col-1 < 0 ? col : memo[row][col-1];
+            int top = row-1 < 0 ? row : memo[row-1][col];
+            if(left > top) {
+                col--;
+            } else {
+                row--;
+            }
+        }
+        path = matrix[0][0] + " " + path;
+        return path.trim();
     }
 
     private void print(int[][] array) {
