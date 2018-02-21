@@ -11,9 +11,9 @@ public class MaximumPathSumTest {
     /**
      * Input grid:
      *
-     * 8 6 7
-     * 5 3 0
-     * 9 5 1
+     * 8 6 7   8  14 21
+     * 5 3 0   13 17 21
+     * 9 5 1   22 27 28
      *
      **/
     @Test
@@ -120,6 +120,7 @@ public class MaximumPathSumTest {
         assertEquals(-7, maxValue);
     }
 
+
     /**
      * Input grid:
      *
@@ -186,6 +187,34 @@ public class MaximumPathSumTest {
         MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
         int maxValue = maximumPathSum.calculateMaxSum();
         assertEquals(31, maxValue);
+    }
+
+    /**
+     * Input grid:
+     *
+     * 8 6 7
+     * 5 3 0
+     * 9 5 1
+     *
+     **/
+    @Test
+    public void testGetMaxSumPath() {
+        int[][] matrix = new int[3][3];
+        matrix[0][0] = 8;
+        matrix[0][1] = 6;
+        matrix[0][2] = 7;
+
+        matrix[1][0] = 5;
+        matrix[1][1] = 3;
+        matrix[1][2] = 0;
+
+        matrix[2][0] = 9;
+        matrix[2][1] = 5;
+        matrix[2][2] = 1;
+
+        MaximumPathSum maximumPathSum = new MaximumPathSum(matrix);
+        String path = maximumPathSum.findMaximumPath();
+        assertEquals("8 5 9 5 1", path);
     }
   
     @Test

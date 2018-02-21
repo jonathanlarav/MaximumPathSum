@@ -11,6 +11,11 @@ public class MaximumPathSum {
     }
 
     public int calculateMaxSum() {
+        int[][] maxValuesMatrix = calculateValuesMatrix();
+        return maxValuesMatrix[matrix.length-1][matrix[0].length-1];
+    }
+
+    private int[][] calculateValuesMatrix() {
         int[][] memo = new int[matrix.length][matrix[0].length];
 
         for (int i=0; i< this.matrix.length; i++) {
@@ -29,8 +34,30 @@ public class MaximumPathSum {
                 memo[i][j] = value;
             }
         }
-        //print(memo);
-        return memo[matrix.length-1][matrix[0].length-1];
+        return memo;
+    }
+
+    public String findMaximumPath() {
+        int[][] maxValuesMatrix = calculateValuesMatrix();
+        return findPath(maxValuesMatrix);
+    }
+
+    private String findPath(int[][] memo) {
+        String path="";
+        int row=memo.length-1, col=memo[0].length-1;
+        while(row != 0 || col != 0){
+            path = matrix[row][col] + " " + path;
+
+            int left = col-1 < 0 ? col : memo[row][col-1];
+            int top = row-1 < 0 ? row : memo[row-1][col];
+            if(left > top) {
+                col--;
+            } else {
+                row--;
+            }
+        }
+        path = matrix[0][0] + " " + path;
+        return path.trim();
     }
 
     public static void print(int[][] array) {
